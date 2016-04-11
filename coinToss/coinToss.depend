@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1460377128 source:h:\tnm098\tnm098\cointoss\main.cpp
+	<iostream>
+	<string>
+	<fstream>
+	<vector>
+
