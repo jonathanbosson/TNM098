@@ -8,6 +8,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -111,6 +112,7 @@ int main()
     cout << "New peopleData length second evaluation: " << peopleData.size() << endl;
 
     cout << "The following datapoints are humans: " << endl;
+    sort(peopleData.begin(), peopleData.end());
     for (int i = 0; i < peopleData.size() -1; i++)
     {
         cout << peopleData[i]+1 << ", ";
