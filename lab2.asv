@@ -1,0 +1,32 @@
+% Data dimensions: time,id,duration,gpIndex,x,y
+data = csvread('eyetrack.csv');
+
+
+% plot of gaze points on screen over the entire duration.
+%plot (data(:,5), data(:,6), '.')
+
+%X = data(:,3);
+X = 
+
+[idx,ctrs] = kmeans(X,2,'Distance','city',...
+              'Replicates',5);
+
+%// Plot starts here
+figure,hold on
+
+%// Set x and y limits of the plot
+xlim([0 max(data(:,5))+50])
+ylim([0 max(data(:,6))+50])
+
+%// Plot point by point
+for k = 1:numel(x)
+    color = 'r.';
+    if(idx(k) == 1)
+        color = 'b.';
+    end
+    plot(data(k,5),data(k,6), color) %// Choose your own marker here
+    
+    %// MATLAB pauses for 0.001 sec before moving on to execue the next 
+    %%// instruction and thus creating animation effect
+    pause(0.001);     
+end
