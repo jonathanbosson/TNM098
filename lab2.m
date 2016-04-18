@@ -37,7 +37,7 @@ for k = 1:size(data,1)
     
     %// MATLAB pauses for 0.001 sec before moving on to execue the next 
     %%// instruction and thus creating animation effect
-    pause(0.001);     
+    pause(0.01);     
 end
 
 % Cluster by duration
