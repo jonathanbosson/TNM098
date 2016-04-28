@@ -108,7 +108,8 @@ int main()
     cout << "\nUnique words in hashtable: " << hashTable.size() << "\n"
     << "Maximum id: " << maxI << "\n";
 
-    // Compare translated texts    
+    // Compare translated texts   
+    bool beenThere = false; 
     string line, comparedLine;
     ifstream comparedFile;
     int readLines = 0; int atLine = 0; int numWords = 0;
@@ -124,17 +125,16 @@ int main()
 
         if (t == 10) {
             filePath = "translated/10.txt";
-            newfile << "\n*** Compare textfile translated/" << t << ".txt ***\n\n";
+            
             cout << "Compare textfile translated/" << t << ".txt\n";
-        } else {
-            newfile << "\n*** Compare textfile translated/0" << t << ".txt ***\n\n";
+        } else
             cout << "Compare textfile translated/0" << t << ".txt\n";
-        }
+
         file.open(filePath);
         if (file.is_open()) {
             atLine = 0; numWords = 0;
             while (getline(file, line)) {
-                // check witha ll other text's lines to see how it compares
+                // check with all other text's lines to see how it compares
                 istringstream stream(line);
                 numWords = distance(istream_iterator<string>(stream), istream_iterator<string>());
                 atLine++;
@@ -148,7 +148,16 @@ int main()
                     if (comparedFile.is_open()) {
                         while (getline(comparedFile, comparedLine)) {
                             readLines++;
-                            if (numWords > 1 && comparedLine == line) {
+                            if (numWords > 4 && comparedLine == line) {
+                                // if first time here for each file, 
+                                if (!beenThere) {
+                                    beenThere = true;
+                                    if (t == 10)
+                                        newfile << "\n*** Compare textfile translated/" << t << ".txt ***\n\n";
+                                    else
+                                        newfile << "\n*** Compare textfile translated/0" << t << ".txt ***\n\n";
+ 
+                                }
                                 if (i == 10)
                                     newfile << "Line " << atLine << " is similar to " << i << ".txt at line " << readLines << "\n";
                                 else 
@@ -164,13 +173,8 @@ int main()
                                             break;
                                         }
                                     }
-                                }
-                                //newfile << line << " ";    
+                                } 
                                 newfile << "\"\n\n";
-
-                                // can't decode since we have a map data structure, can only find Key (string word)
-                                // hashTable.find(currWord)->first
-                                // make an estimate on how similar it is? better if statement?
                             }
                         }
                         comparedFile.close();
@@ -180,6 +184,7 @@ int main()
             }
             file.close();
         }
+        beenThere = false;
     }
     newfile.close();
 
