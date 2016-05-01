@@ -6,7 +6,7 @@ loadFiles;
 
 % First argument image in database
 % Second argument image to compare
-[result, imFeat] = main(images,12);
+[result, imFeat] = main(images,4);
 
 %Sort the result
 [B,I] = sort(result);
