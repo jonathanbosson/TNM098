@@ -4,6 +4,12 @@
 %Read all files and store them in a cell
 loadFiles;
 
+featureVec{1}=0;
+featureVec{2}=0;
+featureVec{3}=0;
+%featureVec{4}=0;
+%featureVec{5}=0;
+
 disp('Loop through all the images')
 for k = 1:numel(images)
     
@@ -30,15 +36,21 @@ for k = 1:numel(images)
     
     % 4: Check illumination in four regions
     colIllu = colorIllu(image);
-    imageFeature(5) = colIllu{1}; %Illumination area 1
-    imageFeature(6) = colIllu{2}; %Illumination area 2
-    imageFeature(7) = colIllu{3}; %Illumination area 3 
-    imageFeature(8) = colIllu{4}; %Illumination area 4
+    imageFeature(5) = colIllu{1};
+    imageFeature(6) = colIllu{2};
+    imageFeature(7) = colIllu{3};
+    imageFeature(8) = colIllu{4};
+    res(5) = colIllu{1}; %Illumination area 1
+    res(6) = colIllu{2}; %Illumination area 2
+    res(7) = colIllu{3}; %Illumination area 3
+    res(8) = colIllu{4}; %Illumination area 4
+    %featureVec{1} = featureVec{4} + colIllu;
     
     % 5: Check aspect ration of image
     % Not used in res as of now
     imgRatio = imageRatio(image);
-    imageFeature(9) = imgRatio; %Aspect ratio
+    imageFeature(9) = imgRatio;
+    res(9) = imgRatio; % Aspect ratio
     
     % 6: Check edges
     %edgeImg = edgeDetec(image);
@@ -49,6 +61,12 @@ for k = 1:numel(images)
     imageFeature(10) = findFace(image);
     imagesFeature{k} = imageFeature;
     
+    
+    featureVec{k,1} = colCont;
+    featureVec{k,2} = featureVec{1,2} + colDist{1};
+    featureVec{k,3} = colIlluWhole;
+    featureVec{k,5} = imgRatio;
+    
 end
 
 %Image to be compared
@@ -56,7 +74,7 @@ im = imagesFeature{2};
 
 disp('Euclidian distance')
 for h=1:12
-    result(h) = norm(im - imagesFeature{h});
+    norm(im - imagesFeature{h})
 end
 
 %Result
