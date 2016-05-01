@@ -20,11 +20,10 @@ area2ColorSat = area2(:,:,2);
 area3ColorSat = area3(:,:,2);
 area4ColorSat = area4(:,:,2);
 
-%Sum all elements
-area1ColorSat = sum(area1ColorSat(:));
-area2ColorSat = sum(area2ColorSat(:));
-area3ColorSat = sum(area3ColorSat(:));
-area4ColorSat = sum(area4ColorSat(:));
+area1ColorSat = area1(:,:,2);
+area2ColorSat = area2(:,:,2);
+area3ColorSat = area3(:,:,2);
+area4ColorSat = area4(:,:,2);
 
 
 imOut = {area1ColorSat area2ColorSat ... 

@@ -11,6 +11,6 @@ BB = step(FDetect,im);
 valueOut = isempty(BB);
 
 %Weight
-valueOut = valueOut * 10000000000;
-
+valueOut = valueOut * 100000000000;
+valueO
 end
